@@ -6,7 +6,7 @@ from sqlalchemy.sql.expression import text
 class Sem(Base):
     __tablename__ = "sem"
     id = Column(Integer,primary_key=True, nullable = False)
-    semnum: Column(String, nullable=False)
+    semnum = Column(String, nullable=False)
 
 class Subject(Base):
     __tablename__  = "subject"
