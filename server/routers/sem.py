@@ -20,7 +20,7 @@ def add_sem(sem:schemas.RequestSem ,db:Session = Depends(get_db)):
 @router.get("/sem",response_model=List[schemas.ResponseSem])
 def get_all_sem(db: Session = Depends(get_db)):
     sems = db.query(models.Sem).all()
-    return {"sems": sems}
+    return sems
 
 @router.get("/sem/{id}", response_model=schemas.ResponseSem)
 def get_sem_by_id(id: int,db: Session = Depends(get_db)):

@@ -10,7 +10,9 @@ router = APIRouter(tags=['Questions'])
 
 # create
 @router.post("/question")
-def add_question(question:schemas.RequestQuestion,db: Session = Depends(get_db)):
+def add_question(question:schemas.RequestQuestion,db: Session = Depends(get_db),current_user = Depends(Oauth2.get_current_user)):
+    if(current_user.role != "ADMIN"):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not Authorized")
     new_ques = models.Question(**question.dict())
     db.add(new_ques)
     db.commit()
@@ -18,14 +20,17 @@ def add_question(question:schemas.RequestQuestion,db: Session = Depends(get_db))
     return new_ques
 
 @router.get('/question')
-def get_all_question(db: Session = Depends(get_db)):
-    subject = db.query(models.Subject).all()
+def get_all_question(db: Session = Depends(get_db), current_user = Depends(Oauth2.get_current_user)):
+    print(current_user.role)
+    if(current_user.role != "ADMIN"):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not Authorized")
+    subject = db.query(models.Question).all()
     return {"subject":subject}
 
-
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJyb2xlIjoiVVNFUiIsImV4cCI6MTY3NTE1ODczOH0.hO9KliAUb3nOyKO95tSQL_VJnVrVoAjK-IqZ7BD1f7I
 @router.get("/question/{id}")
 def get_question_by_id(id: int,db: Session = Depends(get_db)):
-    subject = db.query(models.Subject).filter(models.Subject.id)
+    subject = db.query(models.Question).filter(models.Subject.id)
     subject_data = subject.first()
     if subject_data == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

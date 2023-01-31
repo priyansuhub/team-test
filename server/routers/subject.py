@@ -18,13 +18,13 @@ def add_subject(subject: schemas.RequestSubject,db: Session = Depends(get_db)):
 
 #get request
 @router.get('/subject')
-def get_all_subject(subject: schemas.RequestSubject, db: Session = Depends(get_db)):
+def get_all_subject(db: Session = Depends(get_db)):
     subject = db.query(models.Subject).all()
-    return {"subject":subject}
+    return subject
 
 @router.get('/subject/{sem}')
-def get_subject_by_sem(sem:str,subject:schemas.RequestSubject, db: Session = Depends(get_db)):
-    subject = db.query(models.Subject).filter(models.Subject.semnum == sem).first()
+def get_subject_by_sem(sem:int, db: Session = Depends(get_db)):
+    subject = db.query(models.Subject).filter(models.Subject.sem_id == sem).all()
     return subject
 
 @router.delete('/subject/{id}')

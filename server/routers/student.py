@@ -27,7 +27,7 @@ def student_get(id: int, db:Session = Depends(get_db)):
 def make_admin(id: int,db:Session = Depends(get_db)):
     student_query = db.query(models.Student).filter(models.Student.id == id)
     student = student_query.first()
-    student.role = "USER"
+    student.role = "ADMIN"
     print(student.role)
     db.commit()
     return student_query.first()

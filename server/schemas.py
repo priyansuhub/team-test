@@ -12,6 +12,7 @@ class RequestStudent(BaseModel):
 class ResponseStudent(BaseModel):
     email:EmailStr
     public:bool
+    role:str
 
     class Config:
         orm_mode = True
