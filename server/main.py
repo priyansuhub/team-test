@@ -26,3 +26,6 @@ app.include_router(question.router)
 app.include_router(subject.router)
 app.include_router(sem.router)
 
+@app.get("/")
+def root():
+    return {"message":"Mini Project By MPP"}
