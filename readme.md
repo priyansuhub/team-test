@@ -11,7 +11,7 @@ Figma Design by Prcode
 ![image](./images/DesktopOne.jpg)
 
 ### SUBJECT PAGE
-![image](./images/DesktopTwo.jpg)
+![image](./images/DesktopTwo.png)
 
 ### GENERAL QUESTION
 ![image](./images/DesktopThree.png)
