@@ -1,3 +1,9 @@
+# KIIT MINOR PROJECT
+
+- Purvi Purnima
+- Mayank Kumar Sharma
+- Priyansu Rath
+
 ## Frontend Design 
 Figma Design by Prcode
 
